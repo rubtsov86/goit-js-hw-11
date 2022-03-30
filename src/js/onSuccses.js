@@ -38,13 +38,24 @@ export default async function onSuccses(promise) {
 
         
   refs.galleryWrapperRef.insertAdjacentHTML("beforeend", listMarkup);
-  
 
+  
+  
+  console.dir(window.scrollBy);
+
+  const { height: cardHeight } = document
+  .querySelector(".gallery")
+  .firstElementChild.getBoundingClientRect();
+
+  window.scrollBy({
+    top: cardHeight * 2,
+    behavior: "smooth",
+  });
  
   refs.loadMoreButton.classList.remove('is-hidden');
   
 
-  const lightbox = new SimpleLightbox('.photo-card a');
+  const lightbox = new SimpleLightbox('.photo-card a').refresh();
 
 if ((counter - 1) * 40 === data.totalHits) {
         refs.loadMoreButton.classList.add('is-hidden');
