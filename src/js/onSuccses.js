@@ -40,8 +40,6 @@ export default async function onSuccses(promise) {
   refs.galleryWrapperRef.insertAdjacentHTML("beforeend", listMarkup);
 
   
-  
-  console.dir(window.scrollBy);
 
   const { height: cardHeight } = document
   .querySelector(".gallery")
@@ -51,15 +49,20 @@ export default async function onSuccses(promise) {
     top: cardHeight * 2,
     behavior: "smooth",
   });
+
+  if (document.querySelector('.is-hidden')) {
+      Notiflix.Notify.success(`Hooray! We found ${data.totalHits} images.`)
+    }
  
   refs.loadMoreButton.classList.remove('is-hidden');
+  
   
 
   const lightbox = new SimpleLightbox('.photo-card a').refresh();
 
 if ((counter - 1) * 40 === data.totalHits) {
         refs.loadMoreButton.classList.add('is-hidden');
-        return Notiflix.Notify.failure("We're sorry, but you've reached the end of search results.");
+        return Notiflix.Notify.info("We're sorry, but you've reached the end of search results.");
   }
 
 }
