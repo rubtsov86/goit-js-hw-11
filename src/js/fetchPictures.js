@@ -10,6 +10,8 @@ let counter = 1;
 
 async function fetchPictures() {
     const inputValue = refs.formRef.elements.searchQuery.value;
+
+    
    
     try {
     const response = await axios.get(`${BASE_URL}?key=${API_KEY}&q=${inputValue.trim()}&page=${counter}&per_page=40&image_type="photo"&orientation="horizontal"&safesearch="true"`);
@@ -21,4 +23,8 @@ async function fetchPictures() {
 
 }
 
-export { counter, fetchPictures };
+function resetCounter() {
+    counter = 1;
+}
+
+export { resetCounter, fetchPictures };

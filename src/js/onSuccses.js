@@ -1,13 +1,15 @@
 import Notiflix from 'notiflix';
 import SimpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
-import  { counter } from "./fetchPictures";
+
 
 import refs from "./refs";
 
 
 export default async function onSuccses(promise) {
   const data = await promise;
+
+  console.log(data);
 
   if (data.hits.length === 0) {
     return Notiflix.Notify.failure("Sorry, there are no images matching your search query. Please try again.");
@@ -60,7 +62,8 @@ export default async function onSuccses(promise) {
 
   const lightbox = new SimpleLightbox('.photo-card a').refresh();
 
-if ((counter - 1) * 40 === data.totalHits) {
+
+if (lightbox.elements.length === data.totalHits) {
         refs.loadMoreButton.classList.add('is-hidden');
         return Notiflix.Notify.info("We're sorry, but you've reached the end of search results.");
   }
